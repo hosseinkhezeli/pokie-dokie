@@ -1,8 +1,6 @@
-import { Session, User, Vote } from "@/types/common.types";
+import { Session, User, Vote } from '@/types/common.types';
 
-
-
-type WebSocketMessage = 
+type WebSocketMessage =
   | { type: 'SESSION_UPDATE'; payload: Session }
   | { type: 'USER_JOIN'; payload: User }
   | { type: 'USER_LEAVE'; payload: string }
@@ -26,7 +24,7 @@ type WebSocketCallbacks = {
 
 /**
  * A WebSocket service for real-time communication in the Poker Planning app.
- * 
+ *
  * Note: In a production implementation, this would connect to a real WebSocket server.
  * For the purposes of this demo, we're simulating WebSocket behavior.
  */
@@ -65,15 +63,15 @@ export class WebSocketService {
       this.ws.close();
       this.ws = null;
     }
-    
+
     this.isConnected = false;
     this.sessionId = null;
     this.userId = null;
-    
+
     if (this.callbacks.onConnectionChange) {
       this.callbacks.onConnectionChange(false);
     }
-    
+
     if (this.reconnectTimeout) {
       clearTimeout(this.reconnectTimeout);
       this.reconnectTimeout = null;
@@ -81,7 +79,15 @@ export class WebSocketService {
   }
 
   // Send message through WebSocket
-  send<K extends WebSocketMessage['type']>(type: K, payload: Extract<WebSocketMessage, { type: K }>['payload']): void {
+  send<K extends WebSocketMessage['type']>(
+    type: K,
+    payload: Extract<
+      WebSocketMessage,
+      {
+        type: K;
+      }
+    >['payload']
+  ): void {
     if (!this.isConnected) {
       console.warn('WebSocket is not connected');
       return;
@@ -90,7 +96,7 @@ export class WebSocketService {
     // In a real implementation, this would send a message through the WebSocket
     const message = { type, payload } as Extract<WebSocketMessage, { type: K }>;
     console.log('Sending WebSocket message:', message);
-    
+
     // Simulate WebSocket behavior for demo purposes
     this.simulateMessageProcessing(message);
   }
@@ -100,10 +106,15 @@ export class WebSocketService {
     this.callbacks = callbacks;
   }
 
+  // Check if WebSocket is connected
+  isConnectedToServer(): boolean {
+    return this.isConnected;
+  }
+
   // Handle incoming messages
   private handleMessage(message: WebSocketMessage): void {
     const { type, payload } = message;
-    
+
     switch (type) {
       case 'SESSION_UPDATE':
         if (this.callbacks.onSessionUpdate) {
@@ -157,11 +168,6 @@ export class WebSocketService {
       // Echo back the message for demo purposes
       this.handleMessage(message);
     }, 500);
-  }
-
-  // Check if WebSocket is connected
-  isConnectedToServer(): boolean {
-    return this.isConnected;
   }
 }
 

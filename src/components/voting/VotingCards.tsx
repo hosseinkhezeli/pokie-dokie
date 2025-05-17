@@ -5,9 +5,8 @@ import VotingCard from './VotingCard';
 import { useStore } from '@/store/useStore';
 import { CARD_VALUES, CardValue } from '@/types/common.types';
 
-
 const VotingCards: React.FC = () => {
-  const { currentUser ,session} = useStore();
+  const { currentUser, session } = useStore();
 
   const { sendVote } = useWebSocket();
 
@@ -25,17 +24,18 @@ const VotingCards: React.FC = () => {
   const selectedValue = userVote?.value;
 
   // Calculate vote counts for result display
-  const voteCounts = CARD_VALUES.reduce((counts, value) => {
-    const count = currentStory.votes.filter(
-      (v) => v.value === value
-    ).length;
-    
-    if (count > 0) {
-      counts[value] = count;
-    }
-    
-    return counts;
-  }, {} as Record<CardValue, number>);
+  const voteCounts = CARD_VALUES.reduce(
+    (counts, value) => {
+      const count = currentStory.votes.filter((v) => v.value === value).length;
+
+      if (count > 0) {
+        counts[value] = count;
+      }
+
+      return counts;
+    },
+    {} as Record<CardValue, number>
+  );
 
   const handleCardClick = (value: CardValue) => {
     // Toggle vote if already selected
@@ -48,9 +48,9 @@ const VotingCards: React.FC = () => {
   const votingCompleted = session.areVotesRevealed;
 
   return (
-    <div className="mt-8">
-      <div className="text-center mb-4">
-        <h3 className="text-lg font-medium text-indigo-900">
+    <div className='mt-8'>
+      <div className='text-center mb-4'>
+        <h3 className='text-lg font-medium text-indigo-900'>
           {votingCompleted
             ? 'Results'
             : votingInProgress
@@ -58,14 +58,14 @@ const VotingCards: React.FC = () => {
               : 'Waiting for host to start voting'}
         </h3>
       </div>
-      
-      <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+
+      <div className='flex flex-wrap justify-center gap-3 sm:gap-4'>
         {CARD_VALUES.map((value) => {
           // For result display, only show cards that have votes
           if (votingCompleted && !voteCounts[value]) {
             return null;
           }
-          
+
           return (
             <VotingCard
               key={value}

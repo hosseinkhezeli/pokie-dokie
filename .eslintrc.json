@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": "off",
+    "react-hooks/exhaustive-deps": "off"
+  },
+  "extends": [
+    "next/core-web-vitals"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

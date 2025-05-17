@@ -1,6 +1,7 @@
 // Generate a unique ID
 export const generateId = (length = 8): string => {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
   for (let i = 0; i < length; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -34,22 +35,25 @@ export const calculateAverage = (values: (number | null)[]): number | null => {
 export const calculateMode = (values: (number | null)[]): number | null => {
   const validValues = values.filter((v): v is number => v !== null);
   if (validValues.length === 0) return null;
-  
-  const counts = validValues.reduce((acc, val) => {
-    acc[val] = (acc[val] || 0) + 1;
-    return acc;
-  }, {} as Record<number, number>);
-  
+
+  const counts = validValues.reduce(
+    (acc, val) => {
+      acc[val] = (acc[val] || 0) + 1;
+      return acc;
+    },
+    {} as Record<number, number>
+  );
+
   let maxCount = 0;
   let mode: number | null = null;
-  
+
   for (const [value, count] of Object.entries(counts)) {
     if (count > maxCount) {
       maxCount = count;
       mode = Number(value);
     }
   }
-  
+
   return mode;
 };
 
@@ -59,6 +63,6 @@ export const calculateVotingCompletion = (
   activeUserIds: string[]
 ): number => {
   if (activeUserIds.length === 0) return 0;
-  const votedUserCount = new Set(votes.map(v => v.userId)).size;
+  const votedUserCount = new Set(votes.map((v) => v.userId)).size;
   return Math.round((votedUserCount / activeUserIds.length) * 100);
 };

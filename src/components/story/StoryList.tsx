@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 import { PlusIcon } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { Story } from '@/types/common.types';
@@ -8,11 +7,12 @@ import StoryForm from './StoryForm';
 import StoryItem from './StoryItem';
 
 const StoryList: React.FC = () => {
-
-    const {session,currentUser,deleteStory,setCurrentStory}=useStore()
+  const { session, currentUser, deleteStory, setCurrentStory } = useStore();
 
   const [showForm, setShowForm] = useState(false);
-  const [editingStory, setEditingStory] = useState<Story | undefined>(undefined);
+  const [editingStory, setEditingStory] = useState<Story | undefined>(
+    undefined
+  );
 
   if (!session) return null;
 
@@ -44,34 +44,34 @@ const StoryList: React.FC = () => {
   const isHost = currentUser?.isHost;
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="bg-indigo-50 px-4 py-3 border-b border-indigo-100 flex justify-between items-center">
-        <h2 className="text-lg font-medium text-indigo-800">Stories</h2>
+    <div className='bg-white rounded-lg shadow-md overflow-hidden'>
+      <div className='bg-indigo-50 px-4 py-3 border-b border-indigo-100 flex justify-between items-center'>
+        <h2 className='text-lg font-medium text-indigo-800'>Stories</h2>
         {isHost && (
           <button
             onClick={handleAddNewClick}
-            className="flex items-center px-3 py-1 text-sm bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+            className='flex items-center px-3 py-1 text-sm bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors'
           >
-            <PlusIcon className="h-4 w-4 mr-1" />
+            <PlusIcon className='h-4 w-4 mr-1' />
             Add Story
           </button>
         )}
       </div>
-      
+
       {showForm && (
-        <div className="p-4 border-b border-gray-200">
+        <div className='p-4 border-b border-gray-200'>
           <StoryForm onCancel={handleCancelForm} editingStory={editingStory} />
         </div>
       )}
-      
-      <div className="divide-y divide-gray-200">
+
+      <div className='divide-y divide-gray-200'>
         {session.stories.length === 0 ? (
-          <div className="py-8 text-center text-gray-500">
+          <div className='py-8 text-center text-gray-500'>
             <p>No stories added yet.</p>
             {isHost && (
               <button
                 onClick={handleAddNewClick}
-                className="mt-2 text-indigo-600 hover:text-indigo-800 focus:outline-none"
+                className='mt-2 text-indigo-600 hover:text-indigo-800 focus:outline-none'
               >
                 Add your first story
               </button>

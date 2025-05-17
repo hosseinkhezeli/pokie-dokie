@@ -1,6 +1,6 @@
 import { useStore } from '@/store/useStore';
 import { calculateRemainingTime } from '@/utils/methods';
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const useTimer = () => {
   const { session } = useStore();
@@ -17,7 +17,7 @@ export const useTimer = () => {
 
     const newRemainingTime = calculateRemainingTime(session.timerEndTime);
     setRemainingTime(newRemainingTime);
-    
+
     // If timer reaches zero, stop it
     if (newRemainingTime <= 0) {
       setIsRunning(false);
@@ -47,7 +47,10 @@ export const useTimer = () => {
   // Calculate progress percentage
   const progressPercentage = useCallback(() => {
     if (!session?.timerDuration || !isRunning) return 0;
-    return Math.min(100, ((session.timerDuration - remainingTime) / session.timerDuration) * 100);
+    return Math.min(
+      100,
+      ((session.timerDuration - remainingTime) / session.timerDuration) * 100
+    );
   }, [remainingTime, session?.timerDuration, isRunning]);
 
   return {

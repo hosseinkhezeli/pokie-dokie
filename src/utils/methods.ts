@@ -66,3 +66,11 @@ export const calculateVotingCompletion = (
   const votedUserCount = new Set(votes.map((v) => v.userId)).size;
   return Math.round((votedUserCount / activeUserIds.length) * 100);
 };
+
+//getCookie
+export function getCookie(name: string) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts?.pop()?.split(';').shift();
+}
+//___________________________________________________________________

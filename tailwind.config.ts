@@ -1,112 +1,58 @@
-import type { Config } from 'tailwindcss';
-
-const config: Config = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: 'class',
+  content: ['./src/**/*.{js,ts,jsx,tsx,html}'],
   theme: {
     extend: {
-      fontFamily: {
-        dana: ['var(--font-dana)', 'sans-serif'],
-      },
-      fontSize: {
-        titleXl: ['20px', { lineHeight: '100%', fontWeight: '500' }],
-        titleLg: ['18px', { lineHeight: '100%', fontWeight: '500' }],
-        titleMd: ['16px', { lineHeight: '100%', fontWeight: '500' }],
-        titleSm: ['14px', { lineHeight: '100%', fontWeight: '500' }],
-        bodyMd: ['16px', { lineHeight: '100%', fontWeight: '400' }],
-        bodySm: ['14px', { lineHeight: '100%', fontWeight: '400' }],
-        bodyXs: ['12px', { lineHeight: '100%', fontWeight: '400' }],
-      },
       colors: {
-        primary: 'var(--color-brand)',
-        error: 'var(--color-error)',
-        icon: {
-          gray: 'var(--color-gray)',
-        },
-        background: {
-          lowest: 'var(--color-lowest)',
-          low: 'var(--color-low)',
-        },
-        surface: {
-          disabled: 'var(--color-surface-disabled)',
-          caution: 'var(--color-surface-caution)',
-          error: 'var(--color-surface-error)',
-          info: 'var(--color-surface-info)',
-        },
-        text: {
-          primary: 'var(--color-text-black)',
-          secondary: 'var(--color-gray)',
-          disabled: 'var(--color-text-disabled)',
-          contrast: 'var(--color-lowest)',
-        },
-        border: {
-          primary: 'var(--color-border-default)',
-          disabled: 'var(--color-border-disabled)',
-        },
+        primary: 'var(--color-primary-40)',
+        'on-primary': 'var(--color-100)',
+        'primary-container': 'var(--color-primary-90)',
+        'on-primary-container': 'var(--color-primary-10)',
+        'primary-fixed': 'var(--color-primary-90)',
+        'primary-fixed-dim': 'var(--color-primary-80)',
+        'on-primary-fixed': 'var(--color-primary-10)',
+        'on-primary-fixed-variant': 'var(--color-primary-30)',
+        // _______________________________________________________
+        secondary: 'var(--color-secondary-40)',
+        'on-secondary': 'var(--color-100)',
+        'secondary-container': 'var(--color-secondary-90)',
+        'on-secondary-container': 'var(--color-secondary-10)',
+        'secondary-fixed': 'var(--color-secondary-90)',
+        'secondary-fixed-dim': 'var(--color-secondary-80)',
+        'on-secondary-fixed': 'var(--color-secondary-10)',
+        'on-secondary-fixed-variant': 'var(--color-secondary-30)',
+        // _______________________________________________________
+        tertiary: 'var(--color-tertiary-40)',
+        'on-tertiary': 'var(--color-100)',
+        'tertiary-container': 'var(--color-tertiary-90)',
+        'on-tertiary-container': 'var(--color-tertiary-10)',
+        'tertiary-fixed': 'var(--color-tertiary-90)',
+        'tertiary-fixed-dim': 'var(--color-tertiary-80)',
+        'on-tertiary-fixed': 'var(--color-tertiary-10)',
+        'on-tertiary-fixed-variant': 'var(--color-tertiary-30)',
+        // _______________________________________________________
+        error: 'var(--color-error-40)',
+        'on-error': 'var(--color-100)',
+        'error-container': 'var(--color-error-90)',
+        'on-error-container': 'var(--color-error-10)',
+        // _______________________________________________________
+        surface: 'var(--color-neutral-95)',
+        'surface-dim': 'var(--color-neutral-90)',
+        'surface-bright': 'var(--color-neutral-98)',
+        // _______________________________________________________
+        'on-surface': 'var(--color-neutral-10)',
+        outline: 'var(--color-neutral-50)',
+      },
+      borderRadius: {
+        md: '12px',
+        lg: '16px',
       },
       boxShadow: {
-        high: '0px 0px 5px 0px #00000033',
-        medium: '0px 0px 5px 0px #00000026',
-        low: '0px 0px 5px 0px #0000001A',
-      },
-      animation: {
-        'fade-in': 'fadeIn 0.2s ease-in-out forwards',
-        'fade-out': 'fadeOut 0.3s ease-in-out forwards',
-        'slide-up': 'slideUp 0.3s ease forwards',
-        'slide-down': 'slideDown 0.3s ease forwards',
-        'slide-down-fade': 'slideDownWithFade 0.3s ease forwards',
-        grow: 'grow 0.15s ease forwards',
-        wave: 'waveMove 25s ease-in-out infinite',
-        hovering: 'hovering 3s ease infinite',
-      },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        fadeOut: {
-          '0%': { opacity: '1' },
-          '100%': { opacity: '0' },
-        },
-        slideUp: {
-          '0%': { transform: 'translateY(100%)' },
-          '100%': { transform: 'translateY(0%)' },
-        },
-        waveMove: {
-          '0%, 100%': {
-            transform: 'translateX(0) skew(0deg) scale(1.5)',
-            opacity: '1',
-          },
-          '50%': {
-            transform: 'translateX(2%) skew(15deg) scale(1.4)',
-            opacity: '0.8',
-          },
-        },
-        slideDown: {
-          '0%': { transform: 'translateY(0%)' },
-          '100%': { transform: 'translateY(100%)' },
-        },
-        slideDownWithFade: {
-          '0%': { transform: 'translateY(-100%)', opacity: '0' },
-          '100%': { transform: 'translateY(0%)', opacity: '1' },
-        },
-        grow: {
-          '0%': { transform: 'scale(0)' },
-          '100%': { transform: 'scale(1)' },
-        },
-        hovering: {
-          '0% ,100%': { transform: 'translate(-8%,0%)' },
-          '25%': { transform: 'translate(0%,8%)' },
-          '50%': { transform: 'translate(8%,0%)' },
-          '75%': { transform: 'translate(0%,-8%)' },
-        },
+        md: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+        lg: '0 10px 15px rgba(0,0,0,0.1)',
       },
     },
   },
   plugins: [],
 };
-export default config;

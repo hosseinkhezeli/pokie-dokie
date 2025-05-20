@@ -39,12 +39,12 @@ const Login = () => {
   };
 
   return (
-    <main className='min-h-screen min-w-screen flex items-center justify-center bg-neutral-98 px-4'>
-      <div className='max-w-md w-full bg-neutral-95 rounded-3xl p-8'>
-        <h1 className='text-3xl font-bold mb-6 text-gray-900'>Login</h1>
+    <main className='min-h-screen min-w-screen flex items-center justify-center bg-surface-dim px-4'>
+      <div className='max-w-md w-full bg-surface rounded-3xl p-8'>
+        <h1 className='text-headline-lg mb-6'>ورود</h1>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <TextField
-            label='Username'
+            label='نام کاربری'
             type='string'
             {...register('username', {
               required: 'Username is required',
@@ -59,7 +59,7 @@ const Login = () => {
           />
 
           <TextField
-            label='Password'
+            label='گذرواژه'
             type='password'
             {...register('password', {
               required: 'Password is required',
@@ -71,14 +71,15 @@ const Login = () => {
           />
 
           <Button type='submit' disabled={isSubmitting}>
-            {isSubmitting ? 'Logging in...' : 'Login'}
+            {isSubmitting ? 'در حال ورود...' : 'ورود'}
           </Button>
         </form>
         <p className='mt-4 text-sm text-gray-600'>
-          Don&apos;t have an account?{' '}
+          اکانت ندارید ؟{' '}
           <Link href='/signup' className='text-blue-600 hover:underline'>
-            Sign Up
-          </Link>
+            ثبت نام
+          </Link>{' '}
+          کنید
         </p>
       </div>
     </main>

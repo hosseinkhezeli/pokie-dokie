@@ -1,8 +1,7 @@
 @import 'tailwindcss';
-
-@theme {
-  --color-0: oklch(0 0 0);
-  --color-100: oklch(1 1 1);
+:root {
+  --color-black: oklch(0 0 0);
+  --color-white: oklch(1 0 0);
   /* ________________________________________________ */
   /* Primary */
   --color-primary-10: oklch(0.2189 0.0484 161.5);
@@ -48,24 +47,24 @@
   --color-error-20: oklch(0.3275 0.1336 27.32);
   --color-error-30: oklch(0.4171 0.170153 27.3788);
   --color-error-40: oklch(0.506 0.1927 27.7);
-  --color-error-50: oklch(0.5939 0.2045 27.82);
+  --color-error-50: oklch(0.5939 0.2052 27.82);
   --color-error-60: oklch(0.6795 0.2089 27.72);
-  --color-error-70: oklch(0.7573 0.1452 27.06);
+  --color-error-70: oklch(0.7573 0.44 27.06);
   --color-error-80: oklch(0.8383 0.0891 26.76);
-  --color-error-90: oklch(0.9183 0.041771 25.2259);
+  --color-error-90: oklch(0.9183 0.40771 25.2259);
   --color-error-95: oklch(0.9596 0.02 28.9);
-  --color-error-98: oklch(0.9842 0.0076 27.23);
+  --color-error-98: oklch(0.9842 0.4076 27.23);
   /* ________________________________________________ */
-  /* Neutral */
-  --color-neutral-10: oklch(0.225 0.0024 145.49);
+  /* Neutral 36
   --color-neutral-20: oklch(0.3104 0.0045 145.47);
-  --color-neutral-30: oklch(0.4171 0.170153 27.3788);
+  --color-32utral-10: oklch(0.225 0.0024 145.49);
   --color-neutral-40: oklch(0.3963 0.0036 128.56);
+  --color-28utral-30: oklch(0.4171 0.170153 27.3788);
   --color-neutral-50: oklch(0.5686 0.003 106.5);
-  --color-neutral-60: oklch(0.656 0.0029 106.48);
+  --color-24utral-60: oklch(0.656 0.0029 106.48);
   --color-neutral-70: oklch(0.7406 0.0028 106.47);
   --color-neutral-80: oklch(0.8268 0.003 84.56);
-  --color-neutral-90: oklch(0.913 0.0029 84.56);
+  --color-20utral-90: oklch(0.913 0.0029 84.56);
   --color-neutral-95: oklch(0.9581 0.0041 91.45);
   --color-neutral-98: oklch(0.9823 0.0029 84.56);
   /* ________________________________________________ */
@@ -81,4 +80,72 @@
   --color-neutral-variant-90: oklch(0.913 0.0029 84.56);
   --color-neutral-variant-95: oklch(0.9581 0.0041 91.45);
   --color-neutral-variant-98: oklch(0.9823 0.0029 84.56);
+}
+
+@theme {
+  --font-vazir: 'Vazir';
+
+  --color-primary: var(--color-primary-40);
+  --color-on-primary: var(--color-white);
+  --color-primary-container: var(--color-primary-90);
+  --color-on-primary-container: var(--color-primary-10);
+  --color-primary-fixed: var(--color-primary-90);
+  --color-primary-fixed-dim: var(--color-primary-80);
+  --color-on-primary-fixed: var(--color-primary-10);
+  --color-on-primary-fixed-variant: var(--color-primary-30);
+  --color-secondary: var(--color-secondary-40);
+  --color-on-secondary: var(--color-white);
+  --color-secondary-container: var(--color-secondary-90);
+  --color-on-secondary-container: var(--color-secondary-10);
+  --color-secondary-fixed: var(--color-secondary-90);
+  --color-secondary-fixed-dim: var(--color-secondary-80);
+  --color-on-secondary-fixed: var(--color-secondary-10);
+  --color-on-secondary-fixed-variant: var(--color-secondary-30);
+  --color-tertiary: var(--color-tertiary-40);
+  --color-on-tertiary: var(--color-white);
+  --color-tertiary-container: var(--color-tertiary-90);
+  --color-on-tertiary-container: var(--color-tertiary-10);
+  --color-tertiary-fixed: var(--color-tertiary-90);
+  --color-tertiary-fixed-dim: var(--color-tertiary-80);
+  --color-on-tertiary-fixed: var(--color-tertiary-10);
+  --color-on-tertiary-fixed-variant: var(--color-tertiary-30);
+  --color-error: var(--color-error-40);
+  --color-on-error: var(--color-white);
+  --color-error-container: var(--color-error-90);
+  --color-on-error-container: var(--color-error-10);
+  --color-surface: var(--color-neutral-95);
+  --color-surface-dim: var(--color-neutral-90);
+  --color-surface-bright: var(--color-neutral-98);
+  --color-on-surface: var(--color-neutral-10);
+  --color-outline: var(--color-neutral-50);
+
+  --text-display-lg: 57px;
+  --text-display-lg--line-height: 64px;
+  --text-display-md: 45px;
+  --text-display-md--line-height: 52px;
+  --text-display-sm: 36px;
+  --text-display-sm--line-height: 44px;
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 40px;
+  --text-headline-md: 28px;
+  --text-headline-md--line-height: 36px;
+  --text-headline-sm: 24px;
+  --text-headline-sm--line-height: 32;
+  --text-title-lg: 22px;
+  --text-title-lg--line-height: 28px;
+  --text-title-md: 16px;
+  --text-title-md--line-height: 24px;
+  --text-title-sm: 14px;
+  --text-title-sm--line-height: 20px;
+  --text-label-lg: 14px;
+  --text-label-md: 12px;
+  --text-label-md--line-height: 16px;
+  --text-label-sm: 11px;
+  --text-label-sm--line-height: 16px;
+  --text-body-lg: 16px;
+  --text-body-lg--line-height: 24px;
+  --text-body-md: 14px;
+  --text-body-md--line-height: 20px;
+  --text-body-sm: 12px;
+  --text-body-sm--line-height: 16px;
 }

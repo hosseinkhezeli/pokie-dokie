@@ -1,15 +1,10 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Vazirmatn } from 'next/font/google';
 import './globals.css';
 import { ProvidersLayout } from '@/layouts/ProvidersLayout';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const vazir = Vazirmatn({
+  variable: '--font-vazir',
   subsets: ['latin'],
 });
 
@@ -24,10 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang='fa' dir='rtl' data-theme='light'>
+      <body className={`${vazir.variable} font-vazir antialiased`}>
         <ProvidersLayout>{children}</ProvidersLayout>
       </body>
     </html>

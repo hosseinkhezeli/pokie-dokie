@@ -21,7 +21,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       value: controlledValue,
       onChange: controlledOnChange,
       name,
-      type = 'password',
+      type = 'text',
       required = false,
       className = '',
       ...rest
@@ -95,7 +95,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         </div>
         {(error || helperText) && (
           <span
-            className={`mt-1 block text-bodyXs ${
+            className={`mt-1 block px-2 text-title-sm ${
               error ? 'text-error' : 'text-text-primary'
             }`}
           >

@@ -47,7 +47,7 @@
   --text-headline-md: 28px;
   --text-headline-md--line-height: 36px;
   --text-headline-sm: 24px;
-  --text-headline-sm--line-height: 32;
+  --text-headline-sm--line-height: 32px;
   --text-title-lg: 22px;
   --text-title-lg--line-height: 28px;
   --text-title-md: 16px;
@@ -65,4 +65,58 @@
   --text-body-md--line-height: 20px;
   --text-body-sm: 12px;
   --text-body-sm--line-height: 16px;
+
+  --animate-slide-in: slide-in 0.3s ease;
+  @keyframes slide-in {
+    0% {
+      opacity: 0;
+      transform: translate(0, -10%);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  --animate-slide-up: slide-up 0.3s ease forwards;
+  @keyframes slide-up {
+    0% {
+      opacity: 0;
+      transform: translate(0, 50%);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+  --animate-slide-down: slide-down 0.3s ease forwards;
+  @keyframes slide-down {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(0, 50%);
+    }
+  }
+
+  --animate-fade-in: fade-in 0.3s ease forwards;
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  --animate-fade-out: fade-out 0.3s ease forwards;
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 }

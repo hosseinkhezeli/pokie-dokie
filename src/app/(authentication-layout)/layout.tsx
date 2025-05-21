@@ -1,3 +1,5 @@
+import { Card } from "@/components/ui/card/Card";
+
 export default function AuthenticationLayout({
   children,
 }: Readonly<{
@@ -6,9 +8,7 @@ export default function AuthenticationLayout({
   return (
     <>
       <main className='min-h-screen min-w-screen flex items-center justify-center bg-surface-dim px-4'>
-        <div className='max-w-md w-full bg-surface rounded-3xl p-8'>
-          {children}
-        </div>
+        <Card>{children}</Card>
       </main>
     </>
   );

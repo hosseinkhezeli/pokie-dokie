@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import CreateSession from './CreateSession';
 import JoinSession from './JoinSession';
-import { GemIcon } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { Session, User } from '@/types/common.types';
 import { useRouter } from 'next/navigation';
+
+import { HeroBanner } from './HeroBanner';
 
 const SessionManager: React.FC = () => {
   const { push: navigateTo } = useRouter();
@@ -99,29 +100,13 @@ const SessionManager: React.FC = () => {
   };
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 flex flex-col items-center justify-center p-4'>
-      <div className='mb-8 text-center'>
-        <div className='flex items-center justify-center mb-2'>
-          <GemIcon className='h-10 w-10 text-indigo-600' />
-        </div>
-        <h1 className='text-4xl font-bold text-indigo-800'>Poker Planning</h1>
-        <p className='text-gray-600 mt-2'>
-          Streamline your agile estimation process
-        </p>
-      </div>
-
-      {error && (
-        <div className='w-full max-w-md p-4 mb-4 bg-red-50 border border-red-200 rounded-lg text-red-700'>
-          {error}
-        </div>
-      )}
-
+   <>
       {mode === 'join' ? (
         <JoinSession onJoin={handleJoinSession} isLoading={isLoading} />
       ) : (
         <CreateSession onCreate={handleCreateSession} isLoading={isLoading} />
       )}
-    </div>
+    </>
   );
 };
 

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Vazirmatn } from 'next/font/google';
 import './globals.css';
 import { ProvidersLayout } from '@/layouts/ProvidersLayout';
+import Head from 'next/head';
 
 const vazir = Vazirmatn({
   variable: '--font-vazir',
@@ -19,10 +20,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='fa' dir='rtl' data-theme='light'>
-      <body className={`${vazir.variable} font-vazir antialiased`}>
-        <ProvidersLayout>{children}</ProvidersLayout>
-      </body>
-    </html>
+    <>
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+        />
+      </Head>
+      <html lang='fa' dir='rtl' data-theme='light'>
+        <body className={`${vazir.variable} font-vazir antialiased`}>
+          <ProvidersLayout>{children}</ProvidersLayout>
+        </body>
+      </html>
+    </>
   );
 }

@@ -3,7 +3,6 @@ import React, {
   DetailedHTMLProps,
   forwardRef,
 } from 'react';
-import { Spinner } from '@/components/Spinner';
 
 export type TIconButtonSizes = 'medium' | 'small';
 
@@ -39,7 +38,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IIconButtonProps>(
         {...restProps}
         disabled={isLoading || disabled}
       >
-        {isLoading ? <Spinner /> : children}
+        {isLoading ? '...' : children}
       </button>
     );
   }

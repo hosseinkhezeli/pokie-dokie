@@ -9,15 +9,16 @@ const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const baseClasses = 'px-6 py-3 rounded-full font-semibold transition-all min-w-24';
+  const baseClasses = ' flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all min-w-24 active:scale-[99%]';
   const containedClasses = 'bg-primary text-on-primary hover:brightness-110';
   const outlinedClasses =
-    'border border-primary-40 text-primary-40 hover:bg-primary-10 bg-transparent';
+    'border outline-[1px] outline-transparent border-primary-40 text-primary-40 hover:bg-primary-10 bg-transparent hover:outline-primary ';
 
   return (
     <button
       {...props}
       className={`${baseClasses}  ${variant === 'contained' ? containedClasses : outlinedClasses} ${props.className}`}
+  
     >
       {children}
     </button>

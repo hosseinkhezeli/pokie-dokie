@@ -12,7 +12,6 @@ interface IIconButtonProps
     HTMLButtonElement
   > {
   isLoading?: boolean;
-  size?: TIconButtonSizes;
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IIconButtonProps>(
@@ -20,7 +19,6 @@ export const IconButton = forwardRef<HTMLButtonElement, IIconButtonProps>(
     {
       children,
       isLoading = false,
-      size = 'medium',
       className,
       type = 'button',
       form,

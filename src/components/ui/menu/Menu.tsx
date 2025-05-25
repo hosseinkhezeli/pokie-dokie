@@ -1,7 +1,8 @@
 'use client';
-import { togglePreventScroll } from '@/utils/domUtils';
+
 import { MouseEvent, ReactNode, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { togglePreventScroll } from '@/utils/methods';
 
 export type TMenuProps = {
   open: boolean;

@@ -73,8 +73,12 @@ const Login = () => {
           aria-invalid={!!errors.password}
         />
 
-        <Button type='submit' disabled={isSubmitting} className='w-max'>
-          {isSubmitting ? 'در حال ورود...' : 'ورود'}
+        <Button
+          type='submit'
+          disabled={isSubmitting || isPending}
+          className='w-max'
+        >
+          {isSubmitting || isPending ? 'در حال ورود...' : 'ورود'}
         </Button>
       </form>
       <p className='mt-4 text-sm text-gray-600'>

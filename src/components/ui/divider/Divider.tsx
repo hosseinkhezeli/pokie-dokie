@@ -1,17 +1,17 @@
-import { HTMLAttributes, useMemo } from 'react';
+import { HTMLAttributes, ReactNode, useMemo } from 'react';
 
 type TDividerProps = HTMLAttributes<HTMLDivElement> & {
   fullWidth?: boolean;
-  children?: any;
+  children?: ReactNode;
   orientation?: 'horizontal' | 'vertical';
 };
 
 export function Divider({
-                          fullWidth = false,
-                          children,
-                          orientation = 'horizontal',
-                          ...props
-                        }: TDividerProps) {
+  fullWidth = false,
+  children,
+  orientation = 'horizontal',
+  ...props
+}: TDividerProps) {
   const orientationClassNames = useMemo(() => {
     if (orientation === 'horizontal') {
       if (fullWidth) return 'w-full min-h-[1px]';
@@ -25,17 +25,17 @@ export function Divider({
   if (children)
     return (
       <span
-        aria-hidden="true"
+        aria-hidden='true'
         className={`flex items-center gap-2 ${orientation === 'vertical' && 'flex-col'}`}
       >
         <span
-          aria-hidden="true"
+          aria-hidden='true'
           {...props}
           className={`flex bg-border-disabled ${props.className ?? ''} ${orientationClassNames} `}
         />
         {children}
         <span
-          aria-hidden="true"
+          aria-hidden='true'
           {...props}
           className={`flex bg-border-disabled ${props.className ?? ''} ${orientationClassNames} `}
         />
@@ -43,7 +43,7 @@ export function Divider({
     );
   return (
     <span
-      aria-hidden="true"
+      aria-hidden='true'
       {...props}
       className={`flex bg-border-disabled ${props.className ?? ''} ${orientationClassNames} `}
     />

@@ -21,15 +21,19 @@ export function SessionDialog() {
         {dialogMode === 'join' && (
           <JoinSession
             onJoin={function (sessionId: string, user: User): void {
-              throw new Error('Function not implemented.');
+              throw new Error(
+                `Function not implemented.${sessionId},${user?.id}`
+              );
             }}
             isLoading={false}
           />
         )}
         {dialogMode === 'create' && (
           <CreateSession
-            onCreate={function (sessio: Session, user: User): void {
-              throw new Error('Function not implemented.');
+            onCreate={function (session: Session, user: User): void {
+              throw new Error(
+                `Function not implemented.${session?.id},${user?.id}`
+              );
             }}
             isLoading={false}
           />

@@ -138,8 +138,8 @@ export const OTPInput = forwardRef<HTMLInputElement, OTPInputProps>(
       inputRefs.current[idx]?.select();
     }
 
-    // Determine if any input has value for label floating
-    const hasValue = otpValues.some((v) => v !== '');
+    // // Determine if any input has value for label floating
+    // const hasValue = otpValues.some((v) => v !== '');
 
     return (
       <div className='relative w-full h-max'>

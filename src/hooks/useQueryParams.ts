@@ -8,7 +8,7 @@ export function useQueryParams() {
 
   const addQueryParam = (
     key: string | string[],
-    value: any,
+    value: string,
     searchParams?: string
   ) => {
     const params = new URLSearchParams(

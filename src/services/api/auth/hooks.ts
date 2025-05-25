@@ -1,6 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 import { login, refreshToken, signup } from './services';
-import { TLoginParams, TRefreshTokenParams, TSignUpParams } from '@/types/auth.types';
+import {
+  TLoginParams,
+  TRefreshTokenParams,
+  TSignUpParams,
+} from '@/types/auth.types';
 
 export const useLogin = () =>
   useMutation({

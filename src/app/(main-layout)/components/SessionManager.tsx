@@ -6,12 +6,9 @@ import { useStore } from '@/store/useStore';
 import { Session, User } from '@/types/common.types';
 import { useRouter } from 'next/navigation';
 
-import { HeroBanner } from './HeroBanner';
-
 const SessionManager: React.FC = () => {
   const { push: navigateTo } = useRouter();
-  const { isLoading, error, setSession, setCurrentUser, setLoading } =
-    useStore();
+  const { isLoading, setSession, setCurrentUser, setLoading } = useStore();
   const [mode, setMode] = useState<'join' | 'create'>('join');
 
   // Check hash for mode
@@ -100,7 +97,7 @@ const SessionManager: React.FC = () => {
   };
 
   return (
-   <>
+    <>
       {mode === 'join' ? (
         <JoinSession onJoin={handleJoinSession} isLoading={isLoading} />
       ) : (

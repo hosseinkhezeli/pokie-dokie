@@ -2,7 +2,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
-import TextField from '@/components/ui/text-field/TextField';
 import Button from '@/components/ui/button/Button';
 import { TextInput } from '@/components/ui/input/TextInput';
 
@@ -31,7 +30,11 @@ const SignUp = () => {
   return (
     <>
       <h1 className='text-headline-lg mb-8'>ثبت نام</h1>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className='flex flex-col gap-6'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+        className='flex flex-col gap-6'
+      >
         <TextInput
           label='نام و نام خانوادگی'
           type='text'

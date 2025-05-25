@@ -23,8 +23,8 @@ export default function RootLayout({
     <>
       <Head>
         <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+          rel='stylesheet'
+          href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined'
         />
       </Head>
       <html lang='fa' dir='rtl' data-theme='light'>

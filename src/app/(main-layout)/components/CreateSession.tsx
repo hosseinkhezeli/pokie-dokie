@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Session, User } from '@/types/common.types';
 import { generateId } from '@/utils/methods';
 import { useQueryParams } from '@/hooks/useQueryParams';

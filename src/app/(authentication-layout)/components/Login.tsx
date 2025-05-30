@@ -6,6 +6,9 @@ import Button from '@/components/ui/button/Button';
 import { useLogin } from '@/services/api/auth/hooks';
 import { enqueueSnackbar } from 'notistack';
 import { TextInput } from '@/components/ui/input/TextInput';
+import { TLoginRes } from '@/types/auth.types';
+import { useProfileStore } from '@/store/useProfileStore';
+import { useRouter } from 'next/navigation';
 
 interface LoginFormInputs {
   email: string;
@@ -13,6 +16,8 @@ interface LoginFormInputs {
 }
 
 const Login = () => {
+  const { setUser, setToken } = useProfileStore();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -22,20 +27,23 @@ const Login = () => {
   const { mutate: loginFn, isPending } = useLogin();
 
   const onSubmit = (data: LoginFormInputs) => {
-    loginFn(
-      { password: data.password, username: data.email },
-      {
-        onSuccess() {
-          enqueueSnackbar({
-            variant: 'success',
-            message: 'Login has been successful',
-          });
-        },
-        onError() {
-          enqueueSnackbar({ variant: 'error', message: 'Login failed' });
-        },
-      }
-    );
+    loginFn(data, {
+      onSuccess(response: TLoginRes) {
+        setUser({
+          email: response.data.email,
+          fullname: response.data.fullname,
+        });
+        setToken(response.data.token);
+        enqueueSnackbar({
+          variant: 'success',
+          message: response.message,
+        });
+        router.push('/');
+      },
+      onError(e) {
+        enqueueSnackbar({ variant: 'error', message: e.message });
+      },
+    });
   };
 
   return (

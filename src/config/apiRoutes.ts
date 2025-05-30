@@ -1,8 +1,7 @@
 export const apiRoutes = {
   auth: {
-    login: '/auth/login',
-    refreshToken: '/auth/refresh_token',
-    signUp: '/auth/signup',
+    login: '/login',
+    signUp: '/signup',
   },
   profile: {
     profile: '/profile',

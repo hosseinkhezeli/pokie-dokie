@@ -4,27 +4,38 @@ import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import Button from '@/components/ui/button/Button';
 import { TextInput } from '@/components/ui/input/TextInput';
+import { useSignUp } from '@/services/api/auth/hooks';
+import { useRouter } from 'next/navigation';
+import { enqueueSnackbar } from 'notistack';
 
 interface SignUpFormInputs {
-  name: string;
+  fullname: string;
   email: string;
   password: string;
-  confirmPassword: string;
 }
 
 const SignUp = () => {
+  const router = useRouter();
+  const { mutate: signUpFn } = useSignUp();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isSubmitting },
   } = useForm<SignUpFormInputs>();
 
-  const password = watch('password', '');
-
   const onSubmit = (data: SignUpFormInputs) => {
-    console.log('Sign Up data:', data);
-    // Add your sign up logic here
+    signUpFn(data, {
+      onSuccess: () => {
+        enqueueSnackbar({
+          variant: 'success',
+          message: 'ثبت نام تکمیل شد. حالا با اطلاعاتت وارد شو!',
+        });
+        router?.push('/login');
+      },
+      onError: () => {
+        enqueueSnackbar({ variant: 'error', message: 'نشد یه بار دیگه بزن' });
+      },
+    });
   };
 
   return (
@@ -38,20 +49,20 @@ const SignUp = () => {
         <TextInput
           label='نام و نام خانوادگی'
           type='text'
-          {...register('name', {
-            required: 'Name is required',
+          {...register('fullname', {
+            required: ' نام و نام خانوادگی رو باید بگی!',
             minLength: { value: 2, message: 'Minimum 2 characters' },
           })}
-          error={errors.name?.message}
-          autoComplete='name'
-          aria-invalid={!!errors.name}
+          error={errors.fullname?.message}
+          autoComplete='fullname'
+          aria-invalid={!!errors.fullname}
         />
 
         <TextInput
           label='ایمیل'
           type='email'
           {...register('email', {
-            required: 'Email is required',
+            required: 'ایمیلت رو باید بدی!',
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
               message: 'Invalid email address',
@@ -66,24 +77,12 @@ const SignUp = () => {
           label='گذرواژه'
           type='password'
           {...register('password', {
-            required: 'Password is required',
+            required: 'پسورد باید داشته باشی',
             minLength: { value: 6, message: 'Minimum 6 characters' },
           })}
           error={errors.password?.message}
           autoComplete='new-password'
           aria-invalid={!!errors.password}
-        />
-
-        <TextInput
-          label='تایید گذرواژه'
-          type='password'
-          {...register('confirmPassword', {
-            required: 'Please confirm your password',
-            validate: (value) => value === password || 'Passwords do not match',
-          })}
-          error={errors.confirmPassword?.message}
-          autoComplete='new-password'
-          aria-invalid={!!errors.confirmPassword}
         />
 
         <Button type='submit' disabled={isSubmitting} className='w-max'>

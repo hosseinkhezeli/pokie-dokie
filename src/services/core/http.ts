@@ -42,6 +42,11 @@ http.interceptors.response.use(
         // enqueueSnackbar({ variant: 'error', message: 'ورود غیر مجاز' });
       }
     }
-    return Promise.reject(new Error('Request failed: ' + error.message));
+    return Promise.reject(
+      new Error(
+        (error.response?.data as { error?: string })?.error ??
+          'Request failed: ' + error.message
+      )
+    );
   }
 );

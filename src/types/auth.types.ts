@@ -1,22 +1,15 @@
 export type TLoginParams = {
-  username: string;
+  email: string;
   password: string;
 };
 
 export type TSignUpParams = {
-  username: string;
+  fullname: string;
   password: string;
-  password2: string;
   email: string;
-  first_name: string;
-  last_name: string;
 };
 
-export type TRefreshTokenParams = {
-  refresh: string;
-};
-
-export type TRefreshTokenRes = {
-  refresh: string;
-  access: string;
+export type TLoginRes = {
+  data: { email: string; fullname: string; token: string };
+  message: string;
 };

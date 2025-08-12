@@ -1,12 +1,11 @@
 import type { Metadata } from 'next';
-import { Vazirmatn } from 'next/font/google';
 import './globals.css';
 import { ProvidersLayout } from '@/layouts/ProvidersLayout';
 import Head from 'next/head';
+import localFont from 'next/font/local';
 
-const vazir = Vazirmatn({
-  variable: '--font-vazir',
-  subsets: ['latin'],
+const vazir = localFont({
+  src: '../../public/fonts/vazir/Vazirmatn-VariableFont_wght.ttf',
 });
 
 export const metadata: Metadata = {
@@ -28,7 +27,7 @@ export default function RootLayout({
         />
       </Head>
       <html lang='fa' dir='rtl' data-theme='light'>
-        <body className={`${vazir.variable} font-vazir antialiased`}>
+        <body className={`${vazir.className} antialiased`}>
           <ProvidersLayout>{children}</ProvidersLayout>
         </body>
       </html>

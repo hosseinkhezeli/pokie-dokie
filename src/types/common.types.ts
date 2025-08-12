@@ -1,3 +1,9 @@
+export interface IResponseType<T> {
+  status: number;
+  message: string;
+  data: T;
+}
+
 export interface IIconProps {
   width?: string;
   height?: string;

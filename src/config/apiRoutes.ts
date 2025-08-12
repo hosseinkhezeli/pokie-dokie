@@ -1,9 +1,13 @@
 export const apiRoutes = {
   auth: {
-    login: '/login',
-    signUp: '/signup',
+    login: '/api/auth/login',
+    signUp: '/api/auth/signup',
+  },
+  session: {
+    create: '/api/session',
+    join: '/api/session/join',
   },
   profile: {
-    profile: '/profile',
+    profile: '/api/auth/profile',
   },
 };

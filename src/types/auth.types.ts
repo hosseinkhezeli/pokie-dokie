@@ -10,6 +10,6 @@ export type TSignUpParams = {
 };
 
 export type TLoginRes = {
-  data: { email: string; fullname: string; token: string };
+  data: { token: string; email: string; fullName: string };
   message: string;
 };

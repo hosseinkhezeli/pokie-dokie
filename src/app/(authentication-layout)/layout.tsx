@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card/Card';
 
-export default function AuthenticationLayout({
+export default async function AuthenticationLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

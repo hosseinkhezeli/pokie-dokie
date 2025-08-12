@@ -31,7 +31,7 @@ const Login = () => {
       onSuccess(response: TLoginRes) {
         setUser({
           email: response.data.email,
-          fullname: response.data.fullname,
+          fullname: response.data.fullName,
         });
         setToken(response.data.token);
         enqueueSnackbar({
@@ -47,7 +47,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <section className='animate-slide-in'>
       <h1 className='text-headline-lg mb-8'>ورود</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -96,7 +96,7 @@ const Login = () => {
         </Link>{' '}
         کنید
       </p>
-    </>
+    </section>
   );
 };
 

@@ -39,7 +39,7 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <section className='animate-slide-in'>
       <h1 className='text-headline-lg mb-8'>ثبت نام</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -95,7 +95,7 @@ const SignUp = () => {
           ورود
         </Link>
       </p>
-    </>
+    </section>
   );
 };
 

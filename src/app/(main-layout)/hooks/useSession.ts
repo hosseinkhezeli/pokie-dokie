@@ -1,4 +1,5 @@
 import { useCreateSession, useJoinSession } from '@/services/api/session/hooks';
+import { enqueueSnackbar } from 'notistack';
 
 export interface ICreateSessionForm {
   name: string;
@@ -12,18 +13,21 @@ export function useSession() {
   const {
     mutateAsync: joinSessionFn,
     isPending: isPendingJoinSession,
-    error: joinSessionError,
+    isError: isErrorJoinSession,
   } = useJoinSession();
   const {
     mutateAsync: createSessionFn,
     isPending: isPendingCreateSession,
-    error: createSessionError,
+    isError: isErrorCreateSession,
   } = useCreateSession();
 
   async function handleCreateSession(body: ICreateSessionForm) {
     await createSessionFn(body, {
       onSuccess(data) {
         console.log(data);
+      },
+      onError() {
+        enqueueSnackbar({ variant: 'error', message: 'نشد یه بار دیگه بزن' });
       },
     });
   }
@@ -33,6 +37,9 @@ export function useSession() {
       onSuccess(data) {
         console.log(data);
       },
+      onError() {
+        enqueueSnackbar({ variant: 'error', message: 'نشد یه بار دیگه بزن' });
+      },
     });
   }
 
@@ -40,8 +47,8 @@ export function useSession() {
     handleCreateSession,
     handleJoinSession,
     isPendingJoinSession,
-    joinSessionError,
+    isErrorJoinSession,
     isPendingCreateSession,
-    createSessionError,
+    isErrorCreateSession,
   };
 }

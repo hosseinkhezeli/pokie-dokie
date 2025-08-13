@@ -1,14 +1,17 @@
 import { HeroBanner } from './components/HeroBanner';
+import { RecentSessions } from './components/RecentSessions';
 import { SessionDialog } from './components/SessionDialog';
 
 export const dynamic = 'force-dynamic';
 
 export default function Home() {
   return (
-    <div className='min-h-screen flex flex-col items-center p-4'>
-      <HeroBanner />
+    <div className='min-h-screen p-4'>
+      <div className='flex flex-col !max-w-5xl w-full mx-auto gap-4'>
+        <HeroBanner />
+        <RecentSessions />
+      </div>
       <SessionDialog />
-      {/* <SessionManager /> */}
     </div>
   );
 }

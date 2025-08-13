@@ -1,3 +1,5 @@
+import { IUser } from './user.types';
+
 export type TCreateSessionBody = {
   name: string;
 };
@@ -6,17 +8,14 @@ export type TJoinSessionBody = {
   sessionId: string;
 };
 
-export type TSessionOwner = {
-  id: number;
-  email: string;
-  fullName: string;
-};
-
 export type TSession = {
   id: number;
   name: string;
-  active: true;
+  active: boolean;
   createdAt: string | Date;
   updatedAt: string | Date;
-  owner: TSessionOwner;
+  owner: IUser;
+  participants: IUser[];
 };
+
+export type TGetRecentSessionsRes = TSession[]

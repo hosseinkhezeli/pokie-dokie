@@ -24,7 +24,7 @@ export function HeroBanner() {
   };
 
   return (
-    <Card className='!max-w-5xl flex flex-col gap-4 animate-slide-in'>
+    <Card className='!max-w-full flex flex-col gap-4 animate-slide-in'>
       <h2 className='text-display-md font-black'>شروع کنیم؟</h2>
       <p className='inline-flex flex-col gap-2 text-title-lg font-extrabold'>
         بیا تو جلسه پوکر پلنینگ!

@@ -9,8 +9,7 @@ import { PlusCircleIcon } from '@/lib/icons/PlusCircle';
 import { ICreateSessionForm, useSession } from '../hooks/useSession';
 
 export function CreateSession() {
-  const { handleCreateSession, isPendingCreateSession, createSessionError } =
-    useSession();
+  const { handleCreateSession, isPendingCreateSession } = useSession();
   const { addQueryParam } = useQueryParams();
   const {
     register,
@@ -39,7 +38,7 @@ export function CreateSession() {
           {...register('name', {
             required: 'نام نشست اجباریه!',
           })}
-          error={errors?.name?.message ?? createSessionError?.message}
+          error={errors?.name?.message}
           autoComplete='session id'
           aria-invalid={!!errors?.name}
           disabled={isPendingCreateSession}

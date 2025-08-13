@@ -29,7 +29,7 @@ const Modal: React.FC<ModalProps> = ({
       setIsClosing(false);
       onClose();
       closeTimeoutRef.current = null;
-    }, 50);
+    }, 100);
   }, [onClose]);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const Modal: React.FC<ModalProps> = ({
 
   return ReactDOM.createPortal(
     <div
-      className={`fixed transition-all inset-0 z-50 flex items-center justify-center bg-black/50
+      className={`fixed transition-all inset-0 z-50 flex items-center justify-center bg-black/30
         ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}
         opacity-100`}
       onClick={() => {

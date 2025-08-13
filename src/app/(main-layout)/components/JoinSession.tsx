@@ -10,8 +10,7 @@ import { EnterIcon } from '@/lib/icons/Enter';
 import { IJoinSessionForm, useSession } from '../hooks/useSession';
 
 export function JoinSession() {
-  const { joinSessionError, isPendingJoinSession, handleJoinSession } =
-    useSession();
+  const { isPendingJoinSession, handleJoinSession } = useSession();
   const { addQueryParam } = useQueryParams();
   const {
     register,
@@ -40,7 +39,7 @@ export function JoinSession() {
           {...register('sessionId', {
             required: 'کلید نشست اجباریه!',
           })}
-          error={errors.sessionId?.message ?? joinSessionError?.message}
+          error={errors.sessionId?.message}
           autoComplete='session id'
           aria-invalid={!!errors.sessionId}
           disabled={isPendingJoinSession}

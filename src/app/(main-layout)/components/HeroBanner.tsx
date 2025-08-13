@@ -1,4 +1,5 @@
 'use client';
+import { useTransition } from 'react';
 import Button from '@/components/ui/button/Button';
 import { Card } from '@/components/ui/card/Card';
 import { useQueryParams } from '@/hooks/useQueryParams';
@@ -8,9 +9,20 @@ import { PlusCircleIcon } from '@/lib/icons/PlusCircle';
 
 export function HeroBanner() {
   const { addQueryParam } = useQueryParams();
+  const [isPendingCreate, startTransitionCreate] = useTransition();
+  const [isPendingJoin, startTransitionJoin] = useTransition();
   const handleOpenDialog = (mode: 'join' | 'create') => {
-    addQueryParam(SEARCH_PARAMS_KEYS.dialogMode, mode);
+    if (mode === 'create') {
+      startTransitionCreate(() => {
+        addQueryParam(SEARCH_PARAMS_KEYS.dialogMode, mode);
+      });
+    } else {
+      startTransitionJoin(() => {
+        addQueryParam(SEARCH_PARAMS_KEYS.dialogMode, mode);
+      });
+    }
   };
+
   return (
     <Card className='!max-w-5xl flex flex-col gap-4 animate-slide-in'>
       <h2 className='text-display-md font-black'>شروع کنیم؟</h2>
@@ -22,11 +34,20 @@ export function HeroBanner() {
         </span>
       </p>
       <div className='flex flex-row-reverse w-full gap-2'>
-        <Button onClick={() => handleOpenDialog('create')}>
-          نشست جدید بساز <PlusCircleIcon />
+        <Button
+          onClick={() => handleOpenDialog('create')}
+          loading={isPendingCreate}
+          endIcon={<PlusCircleIcon />}
+        >
+          نشست جدید بساز
         </Button>
-        <Button variant='outlined' onClick={() => handleOpenDialog('join')}>
-          ورود به نشست <EnterIcon fill='inherit' />
+        <Button
+          variant='outlined'
+          onClick={() => handleOpenDialog('join')}
+          loading={isPendingJoin}
+          endIcon={<EnterIcon fill='inherit' />}
+        >
+          ورود به نشست
         </Button>
       </div>
     </Card>

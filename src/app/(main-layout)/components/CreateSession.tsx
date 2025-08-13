@@ -1,60 +1,24 @@
 'use client';
 import React from 'react';
-import { Session, User } from '@/types/common.types';
-import { generateId } from '@/utils/methods';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { useForm } from 'react-hook-form';
 import Button from '@/components/ui/button/Button';
 import { TextInput } from '@/components/ui/input/TextInput';
 import { SEARCH_PARAMS_KEYS } from '@/lib/consts';
 import { PlusCircleIcon } from '@/lib/icons/PlusCircle';
+import { ICreateSessionForm, useSession } from '../hooks/useSession';
 
-interface CreateSessionProps {
-  onCreate: (session: Session, user: User) => void;
-  isLoading: boolean;
-}
-
-interface ICreateSessionProps {
-  session: Session;
-  user: User;
-}
-
-const CreateSession: React.FC<CreateSessionProps> = ({
-  onCreate,
-  isLoading,
-}) => {
+export function CreateSession() {
+  const { handleCreateSession, isPendingCreateSession } = useSession();
   const { addQueryParam } = useQueryParams();
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<ICreateSessionProps>();
+    formState: { errors },
+  } = useForm<ICreateSessionForm>();
 
-  const onSubmit = (data: ICreateSessionProps) => {
-    const sessionId = generateId();
-    const userId = generateId();
-
-    const user: User = {
-      id: userId,
-      name: data?.user?.name,
-      isActive: true,
-      isHost: true,
-    };
-
-    const session: Session = {
-      id: sessionId,
-      name: data?.session?.name.trim(),
-      createdAt: Date.now(),
-      host: userId,
-      users: [user],
-      stories: [],
-      currentStoryId: null,
-      timerDuration: 60, // Default: 1 minute
-      timerEndTime: null,
-      areVotesRevealed: false,
-    };
-
-    onCreate(session, user);
+  const onSubmit = (data: ICreateSessionForm) => {
+    handleCreateSession(data);
   };
 
   const handleNavigateToJoin = () => {
@@ -71,17 +35,22 @@ const CreateSession: React.FC<CreateSessionProps> = ({
       >
         <TextInput
           label='نام نشست'
-          {...register('session.name', {
+          {...register('name', {
             required: 'نام نشست اجباریه!',
           })}
-          error={errors.session?.name?.message}
+          error={errors?.name?.message}
           autoComplete='session id'
-          aria-invalid={!!errors.session?.name}
+          aria-invalid={!!errors?.name}
+          disabled={isPendingCreateSession}
         />
 
-        <Button type='submit' disabled={isLoading} className='w-max'>
-          {isSubmitting ? 'در حال ایجاد...' : 'ایجاد نشست جدید'}
-          <PlusCircleIcon />
+        <Button
+          type='submit'
+          loading={isPendingCreateSession}
+          className='w-max'
+          endIcon={<PlusCircleIcon fill='currentColor' />}
+        >
+          {isPendingCreateSession ? 'در حال ایجاد ...' : 'ایجاد نشست جدید'}
         </Button>
       </form>
 
@@ -96,6 +65,4 @@ const CreateSession: React.FC<CreateSessionProps> = ({
       </div>
     </div>
   );
-};
-
-export default CreateSession;
+}

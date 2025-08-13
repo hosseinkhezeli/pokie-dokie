@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import { IconButton } from '../button/IconButton';
 import { PlusCircleIcon } from '@/lib/icons/PlusCircle';
 
 export interface ModalProps {
-  isOpen: boolean;
+  isOpen: boolean | string | null | undefined;
   onClose: () => void;
   children: React.ReactNode;
   closeOnOverlayClick?: boolean;
@@ -22,6 +22,16 @@ const Modal: React.FC<ModalProps> = ({
   const [isClosing, setIsClosing] = useState(false);
   const closeTimeoutRef = useRef<number | null>(null);
 
+  const handleClose = useCallback(() => {
+    setIsClosing(true);
+    closeTimeoutRef.current = window.setTimeout(() => {
+      setIsVisible(false);
+      setIsClosing(false);
+      onClose();
+      closeTimeoutRef.current = null;
+    }, 100);
+  }, [onClose]);
+
   useEffect(() => {
     if (isOpen) {
       if (closeTimeoutRef.current) {
@@ -31,16 +41,9 @@ const Modal: React.FC<ModalProps> = ({
       setIsVisible(true);
       setIsClosing(false);
     } else if (isVisible) {
-      // Start closing animation and wait 600ms before unmounting
-      setIsClosing(true);
-      closeTimeoutRef.current = window.setTimeout(() => {
-        setIsVisible(false);
-        setIsClosing(false);
-        onClose();
-        closeTimeoutRef.current = null;
-      }, 300);
+      handleClose();
     }
-  }, [isOpen, isVisible]);
+  }, [isOpen]);
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -55,7 +58,7 @@ const Modal: React.FC<ModalProps> = ({
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        handleClose();
       }
     };
     if (isVisible) {
@@ -64,18 +67,17 @@ const Modal: React.FC<ModalProps> = ({
     return () => {
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [isVisible, onClose]);
+  }, [handleClose, isVisible, onClose]);
 
   if (!isVisible) return null;
-  console.log('isClosing', isClosing);
 
   return ReactDOM.createPortal(
     <div
-      className={`fixed transition-all inset-0 z-50 flex items-center justify-center bg-black/50
+      className={`fixed transition-all inset-0 z-50 flex items-center justify-center bg-black/30
         ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}
         opacity-100`}
       onClick={() => {
-        if (closeOnOverlayClick) onClose();
+        if (closeOnOverlayClick) handleClose();
       }}
       aria-modal='true'
       role='dialog'
@@ -85,10 +87,13 @@ const Modal: React.FC<ModalProps> = ({
       <div
         className={`bg-surface rounded-2xl max-w-lg w-full mx-4 relative
           ${className} 
-          ${isClosing ? 'animate-slide-down ' : 'animate-slide-up'}`}
+          ${isClosing ? 'animate-slide-down' : 'animate-slide-in'}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <IconButton className='absolute rotate-45 top-6 left-6' onClick={()=>onClose()}>
+        <IconButton
+          className='absolute rotate-45 top-6 left-6'
+          onClick={() => handleClose()}
+        >
           <PlusCircleIcon fill='var(--color-neutral-40)' />
         </IconButton>
         {children}

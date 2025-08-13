@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-type BackgroundColor = 'info' | 'error' | 'caution' | 'success';
+type BackgroundColor = 'primary' | 'secondary' | 'tertiary';
 
 type TChipProps = {
   title: ReactNode;
@@ -11,27 +11,24 @@ type TChipProps = {
   paddingY?: number;
 };
 const backgroundColors: Record<BackgroundColor, string> = {
-  info: 'var(--color-surface-info)',
-  error: 'var(--color-surface-error)',
-  caution: 'var(--color-surface-caution)',
-  success: 'var(--color-success)',
+  primary: 'var(--color-primary-60)',
+  secondary: 'var(--color-secondary-60)',
+  tertiary: 'var(--color-tertiary-60)',
 };
 
 export function Chip({
   title,
-  radius = 10,
   height = 32,
   backgroundColor = 'info',
   paddingX = 8,
   paddingY = 4,
 }: TChipProps): ReactNode {
-  const bgColor = backgroundColors[backgroundColor] ?? backgroundColors.info;
+  const bgColor = backgroundColors[backgroundColor] ?? backgroundColors.primary;
 
   return (
     <span
-      className='inline-flex items-center text-bodyXs'
+      className='inline-flex items-center text-body-sm rounded-full w-max'
       style={{
-        borderRadius: radius,
         backgroundColor: bgColor,
         height,
         padding: `${paddingY}px ${paddingX}px`,

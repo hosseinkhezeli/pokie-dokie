@@ -8,6 +8,7 @@ export interface IIconProps {
   width?: string;
   height?: string;
   fill?: string;
+  className?: string;
 }
 
 export type User = {

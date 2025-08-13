@@ -7,5 +7,5 @@ export const appRoutes = {
   team: '/team',
   setting: '/setting',
   help: '/help',
-  session: { sessionById: '/session/[sessionId]' },
+  session: { sessionById: (sessionId: string) => `/sessions/${sessionId}` },
 };

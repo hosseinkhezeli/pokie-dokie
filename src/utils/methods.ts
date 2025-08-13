@@ -86,3 +86,14 @@ export function togglePreventScroll(preventScroll: boolean) {
     }
   }
 }
+
+
+export function persianNumberToNumber(persian: string): number {
+  return Number(
+    persian.replace(/[۰-۹]/g, (d) => String(d.charCodeAt(0) - 1776))
+  );
+}
+
+export function numberToPersianNumber(num: number | string): string {
+  return String(num).replace(/\d/g, (d) => String.fromCharCode(d.charCodeAt(0) + 1728));
+}

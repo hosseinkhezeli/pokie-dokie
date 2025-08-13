@@ -23,7 +23,7 @@ const navItems = [
     href: appRoutes.home,
   },
   {
-    label: 'نشست های فعال',
+    label: 'نشست‌های فعال',
     activeIcon: <PokerChipFillIcon fill='inherit' />,
     icon: <PokerChipIcon fill='inherit' />,
     href: appRoutes['active-session'],
@@ -35,7 +35,7 @@ const navItems = [
     href: appRoutes.history,
   },
   {
-    label: 'تیم ها',
+    label: 'تیم‌ها',
     icon: <TeamIcon fill='inherit' />,
     activeIcon: <TeamFillIcon fill='inherit' />,
     href: appRoutes.team,

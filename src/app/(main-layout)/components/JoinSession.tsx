@@ -1,34 +1,25 @@
 'use client';
 import React from 'react';
 
-import { User } from '@/types/common.types';
 import Button from '@/components/ui/button/Button';
 import { TextInput } from '@/components/ui/input/TextInput';
 import { useForm } from 'react-hook-form';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { SEARCH_PARAMS_KEYS } from '@/lib/consts';
 import { EnterIcon } from '@/lib/icons/Enter';
+import { IJoinSessionForm, useSession } from '../hooks/useSession';
 
-interface JoinSessionProps {
-  onJoin: (sessionId: string, user: User) => void;
-  isLoading: boolean;
-}
-
-interface IJoinForm {
-  sessionId: string;
-  user: User;
-}
-
-const JoinSession: React.FC<JoinSessionProps> = ({ onJoin, isLoading }) => {
+export function JoinSession() {
+  const { isPendingJoinSession, handleJoinSession } = useSession();
   const { addQueryParam } = useQueryParams();
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<IJoinForm>();
+    formState: { errors },
+  } = useForm<IJoinSessionForm>();
 
-  const onSubmit = (data: IJoinForm) => {
-    onJoin(data?.sessionId, data.user);
+  const onSubmit = (data: IJoinSessionForm) => {
+    handleJoinSession(data);
   };
 
   const handleNavigateRoCreate = () => {
@@ -51,10 +42,16 @@ const JoinSession: React.FC<JoinSessionProps> = ({ onJoin, isLoading }) => {
           error={errors.sessionId?.message}
           autoComplete='session id'
           aria-invalid={!!errors.sessionId}
+          disabled={isPendingJoinSession}
         />
 
-        <Button type='submit' disabled={isLoading} className='w-max'>
-          {isSubmitting ? 'در حال ورود...' : 'ورود'} <EnterIcon />
+        <Button
+          type='submit'
+          loading={isPendingJoinSession}
+          className='w-max'
+          endIcon={<EnterIcon />}
+        >
+          {isPendingJoinSession ? 'در حال ورود...' : 'ورود'}
         </Button>
       </form>
 
@@ -69,6 +66,4 @@ const JoinSession: React.FC<JoinSessionProps> = ({ onJoin, isLoading }) => {
       </div>
     </div>
   );
-};
-
-export default JoinSession;
+}

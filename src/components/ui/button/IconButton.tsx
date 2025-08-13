@@ -32,7 +32,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IIconButtonProps>(
         ref={ref}
         type={type}
         {...(form && { form })}
-        className={`transition-all hover:bg-background-low rounded-md p-1 ${disabled || isLoading ? 'btn-disabled' : ''} ${className ?? ''}`}
+        className={`${baseClasses} ${disabled || isLoading ? 'btn-disabled' : ''} ${className ?? ''}`}
         {...restProps}
         disabled={isLoading || disabled}
       >
@@ -43,3 +43,5 @@ export const IconButton = forwardRef<HTMLButtonElement, IIconButtonProps>(
 );
 
 IconButton.displayName = 'IconButton';
+const baseClasses =
+  'transition-all hover:bg-background-low rounded-md p-1 active:scale-95';

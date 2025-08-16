@@ -30,7 +30,7 @@ export function RecentSessionCard({ session }: { session: TSession }) {
       </div>
 
       <Link
-        href={appRoutes.session.sessionById(String(session.id))}
+        href={appRoutes.activeSessionById(String(session.id))}
         aria-label={`ورود به جلسه ${session.name}`}
         className='flex text-primary items-center transition-all absolute top-1/2 right-3/4 text-body-sm font-black -translate-y-1/2 translate-x-full group-hover:right-0 group-hover:translate-x-0 cursor-pointer'
       >

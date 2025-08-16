@@ -18,4 +18,10 @@ export type TSession = {
   participants: IUser[];
 };
 
-export type TGetRecentSessionsRes = TSession[]
+export type TGetRecentSessionsRes = TSession[];
+
+export type Role = 'host' | 'guest';
+
+export type ParticipantState = {
+  role?: Role;
+};

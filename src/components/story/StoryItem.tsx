@@ -1,9 +1,10 @@
 import React from 'react';
 import { CheckCircleIcon, EditIcon, TrashIcon } from 'lucide-react';
 import { Story } from '@/types/common.types';
+import { IStory } from '@/types/story.type';
 
 interface StoryItemProps {
-  story: Story;
+  story: IStory;
   isSelected: boolean;
   onSelect: (storyId: string) => void;
   onEdit?: (story: Story) => void;
